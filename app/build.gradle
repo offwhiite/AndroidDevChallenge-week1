@@ -93,4 +93,5 @@ dependencies {
 
     implementation 'androidx.navigation:navigation-runtime-ktx:2.3.3'
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha08"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
 }
