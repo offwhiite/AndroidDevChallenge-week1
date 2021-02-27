@@ -21,7 +21,12 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -38,7 +43,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
-import androidx.navigation.compose.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.model.AdoptedChild
 import com.example.androiddevchallenge.model.FosterParent
 
@@ -51,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             old = "5",
             description = "She needs some work, but she's a very nice girl!",
             descriptionDetail = "She is a very calm and sweet girl.\n" +
-                    "When we first took him in, his tail was down because he was nervous, but he soon got used to it and came to us with his tail wagging.",
+                "When we first took him in, his tail was down because he was nervous, but he soon got used to it and came to us with his tail wagging.",
             fosterParent = FosterParent(
                 name = "田中太郎",
                 image = R.drawable.biyou_tarumi_man
@@ -63,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             old = "5",
             description = "I'm looking for a foster home.",
             descriptionDetail = "She is a very calm and sweet girl.\n" +
-                    "When we first took him in, his tail was down because he was nervous, but he soon got used to it and came to us with his tail wagging.",
+                "When we first took him in, his tail was down because he was nervous, but he soon got used to it and came to us with his tail wagging.",
 
             fosterParent = FosterParent(
                 name = "田中太郎",
@@ -76,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             old = "5",
             description = "手がかかりますが、いいこです",
             descriptionDetail = "She is a very calm and sweet girl.\n" +
-                    "When we first took him in, his tail was down because he was nervous, but he soon got used to it and came to us with his tail wagging.",
+                "When we first took him in, his tail was down because he was nervous, but he soon got used to it and came to us with his tail wagging.",
 
             fosterParent = FosterParent(
                 name = "田中太郎",
@@ -89,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             old = "5",
             description = "手がかかりますが、いいこです",
             descriptionDetail = "She is a very calm and sweet girl.\n" +
-                    "When we first took him in, his tail was down because he was nervous, but he soon got used to it and came to us with his tail wagging.",
+                "When we first took him in, his tail was down because he was nervous, but he soon got used to it and came to us with his tail wagging.",
 
             fosterParent = FosterParent(
                 name = "田中太郎",
@@ -148,11 +157,13 @@ fun AdoptedChildCard(
             Card(elevation = 8.dp, modifier = Modifier.padding(16.dp)) {
                 Column(
                     Modifier
-                        .clickable(onClick = {
-                            navHostController.navigate(
-                                "adaptedChildDetail/${it.name}/${it.old}/${encode(it.descriptionDetail)}/${it.image}"
-                            )
-                        })
+                        .clickable(
+                            onClick = {
+                                navHostController.navigate(
+                                    "adaptedChildDetail/${it.name}/${it.old}/${encode(it.descriptionDetail)}/${it.image}"
+                                )
+                            }
+                        )
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -168,9 +179,11 @@ fun AdoptedChildCard(
 
                     val dogPainter = painterResource(id = it.image)
                     Image(
-                        painter = dogPainter, contentDescription = "", modifier = Modifier
+                        painter = dogPainter, contentDescription = "",
+                        modifier = Modifier
                             .fillMaxWidth()
-                            .padding(8.dp), contentScale = ContentScale.Crop
+                            .padding(8.dp),
+                        contentScale = ContentScale.Crop
                     )
                 }
             }
@@ -198,8 +211,10 @@ fun AdoptedChildDetail(
 
         val dogPainter = painterResource(id = image)
         Image(
-            painter = dogPainter, contentDescription = "", modifier = Modifier
-                .fillMaxWidth(), contentScale = ContentScale.Crop
+            painter = dogPainter, contentDescription = "",
+            modifier = Modifier
+                .fillMaxWidth(),
+            contentScale = ContentScale.Crop
         )
 
         Spacer(modifier = Modifier.size(0.dp, 16.dp))
@@ -222,7 +237,7 @@ fun PreviewAdoptedChildCard() {
                 old = "5",
                 description = "いいこです",
                 descriptionDetail = "She is a very calm and sweet girl.\n" +
-                        "When we first took him in, his tail was down because he was nervous, but he soon got used to it and came to us with his tail wagging.",
+                    "When we first took him in, his tail was down because he was nervous, but he soon got used to it and came to us with his tail wagging.",
 
                 fosterParent = FosterParent(
                     name = "田中太郎",
