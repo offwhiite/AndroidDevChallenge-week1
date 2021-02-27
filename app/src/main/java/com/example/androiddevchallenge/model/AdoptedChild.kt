@@ -1,7 +1,4 @@
-package com.kuromame.composepathway.model
-
-import android.graphics.drawable.Drawable
-import androidx.compose.ui.graphics.painter.Painter
+package com.example.androiddevchallenge.model
 
 data class AdoptedChild(
     val fosterParent: FosterParent,

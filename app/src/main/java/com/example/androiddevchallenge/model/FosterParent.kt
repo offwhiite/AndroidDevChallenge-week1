@@ -1,4 +1,4 @@
-package com.kuromame.composepathway.model
+package com.example.androiddevchallenge.model
 
 import android.graphics.drawable.Drawable
 import androidx.compose.ui.graphics.painter.Painter
